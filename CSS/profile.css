@@ -1,0 +1,232 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Header Styles */
+.header {
+    background: linear-gradient(to right, #222, #555);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-text h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.subtitle {
+    font-size: 20px;
+    margin: 0;
+}
+
+.logo {
+    width: 150px;
+    height: auto;
+    display: block;
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#usernameDisplay {
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-btn {
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    min-width: 120px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #444;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Sidebar Styles */
+.w3-sidebar {
+    width: 200px;
+    background: linear-gradient(to bottom, #333, #555);
+    color: white;
+    display: none;
+    position: fixed;
+    height: 100%;
+    padding-top: 20px;
+}
+
+.w3-bar-item {
+    background: transparent !important; 
+    padding: 10px;
+    color: white !important;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+}
+
+.w3-bar-item:hover {
+    background-color: #777;
+    color: white !important;
+}
+
+.custom-home-btn {
+    background-color: #833 !important;
+    color: white !important;
+}
+
+.custom-home-btn:hover {
+    background-color: #a44 !important;
+}
+
+/* Profile Page Specific Styles */
+.profile-page {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-page input[type=text],
+.profile-page textarea,
+.profile-page input[type=file] {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 4px;
+    background: #f9f9f9;
+}
+
+.profile-page input[type=text]:focus,
+.profile-page textarea:focus {
+    background-color: #e8e8e8;
+    outline: none;
+}
+
+.profile-page label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+.profile-page textarea {
+    resize: none;
+}
+
+.update-btn {
+    background-color: #333;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.update-btn:hover {
+    opacity: 0.9;
+}
+
+/* Profile Picture Upload Styling */
+.profile-page input[type=file] {
+    border: none;
+    background: none;
+    padding: 5px;
+}
+
+/* Footer Styles */
+.footer {
+    background: linear-gradient(to right, #222, #555);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    text-align: left;
+}
+
+.footer div {
+    flex: 1;
+    margin: 10px;
+    min-width: 250px;
+}
+
+.footer h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #777;
+    padding-bottom: 5px;
+}
+
+.footer p, .footer ul, .footer li {
+    font-size: 14px;
+    color: #ccc;
+    list-style: none;
+    padding: 5px 0;
+    margin: 0;
+}
+
+.footer a {
+    color: #ddd;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: white;
+}
+
+.footer-links ul {
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 5px;
+}

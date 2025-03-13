@@ -1,0 +1,146 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Header Styles */
+.header {
+    background: linear-gradient(to right, #222, #444);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-text h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.subtitle {
+    font-size: 18px;
+    margin: 0;
+}
+
+.logo {
+    width: 150px;
+    height: auto;
+    display: block;
+}
+
+/* Login Form Styles */
+.content {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #333;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+/* Remember Me & Forgot Password Styling */
+.remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    width: 100%;
+}
+
+.remember-forgot label {
+    flex: 1;
+}
+
+.remember-forgot .psw {
+    flex: 1;
+    text-align: right;
+}
+
+.remember-forgot input {
+    margin-right: 5px;
+}
+
+.container {
+    padding: 16px;
+}
+
+/* Footer Styles */
+.footer {
+    background: linear-gradient(to right, #222, #555);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    text-align: left;
+}
+
+.footer div {
+    flex: 1;
+    margin: 10px;
+    min-width: 250px;
+}
+
+.footer h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #777;
+    padding-bottom: 5px;
+}
+
+.footer p, .footer ul, .footer li {
+    font-size: 14px;
+    color: #ccc;
+    list-style: none;
+    padding: 5px 0;
+    margin: 0;
+}
+
+.footer a {
+    color: #ddd;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: white;
+}
+
+.footer-links ul {
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 5px;
+}
