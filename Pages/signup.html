@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - The Wheel of Time Blog</title>
+    <link rel="stylesheet" href="../CSS/signup.css">
+    <script src="../js/script.js" defer></script>
+</head>
+<body>
+        <header class="header">
+            <a href="index.html">
+                <img src="../Images/WOT_Logo.jpg" alt="The Wheel of Time Blog" class="logo">
+            </a>
+            <div class="header-text">
+                <h1>The Wheel of Time Blog</h1>
+                <p class="subtitle">Unravel the Pattern</p>
+            </div>
+        </header>
+
+    <main class="content">
+        <h2>Sign Up</h2>
+        <p>Please fill in this form to create an account.</p>
+        <form action="/action_page.php" method="post">
+            <div class="container">
+                <label for="fname"><b>First Name</b></label>
+                <input type="text" placeholder="Enter First Name" name="fname" required>
+
+                <label for="lname"><b>Last Name</b></label>
+                <input type="text" placeholder="Enter Last Name" name="lname" required>
+
+                <label for="email"><b>Email</b></label>
+                <input type="text" placeholder="Enter Email" name="email" required>
+
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+
+                <label for="psw-repeat"><b>Repeat Password</b></label>
+                <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
+
+                <p>By creating an account you agree to our <a href="#">Terms &amp; Privacy</a>.</p>
+                <button type="submit" class="signupbtn">Sign Up</button>
+            </div>
+        </form>
+        <p>Already have an account? <a href="login.html">Login</a></p>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-about">
+            <h3>About This Blog</h3>
+            <p>The Wheel of Time Blog is a space for fans to explore, discuss, and share insights about the beloved series. Whether you're analyzing deep lore, debating theories, or reviewing episodes and books, this is your home for all things Wheel of Time.</p>
+        </div>
+        <div class="footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blog.html">Blog Posts</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-contact">
+            <h3>Contact Us</h3>
+            <p>Email: support@wheeloftimeblog.com</p>
+            <p>Follow us on <a href="#">Twitter</a> | <a href="#">Facebook</a>  | <a href="#">Instagram </a></p>
+        </div>
+    </footer>
+</body>
+</html>

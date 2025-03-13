@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Posts - The Wheel of Time Blog</title>
+    <link rel="stylesheet" href="../css/blog.css">
+    <script src="../js/script.js" defer></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+    <header class="header">
+        <a href="index.html">
+            <img src="../images/wot_logo.jpg" alt="The Wheel of Time Blog" class="logo">
+        </a>
+        <div class="header-text">
+            <h1>The Wheel of Time Blog</h1>
+            <p class="subtitle">Explore, Discuss, and Learn</p>
+        </div>
+        <div class="user-menu">
+            <span id="usernameDisplay">Guest</span>
+            <div class="dropdown">
+                <button class="dropdown-btn" type="button">▼</button>
+                <div class="dropdown-content">
+                    <a href="profile.html">Profile</a>
+                    <a href="Login.html">Login</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" id="mySidebar">
+        <button type="button" onclick="closeSidebar()" class="w3-bar-item w3-button w3-large">Close &times;</button>
+        <a href="index.html" class="w3-bar-item w3-button w3-#">Home</a>
+        <a href="blog.html" class="w3-bar-item w3-button">Blog Posts</a>
+        <a href="profile.html" class="w3-bar-item w3-button">User Profiles</a>
+        <a href="comments.html" class="w3-bar-item w3-button">Comments &amp; Rankings</a>
+        <a href="moderation.html" class="w3-bar-item w3-button">Moderation</a>
+        <a href="dashboard.html" class="w3-bar-item w3-button">Dashboard</a>
+    </div>
+
+    <!-- Open Sidebar Button -->
+    <div class="w3-container">
+        <button type="button" class="w3-button w3-gray" onclick="openSidebar()">☰ Menu</button>
+    </div>
+
+    <main class="content blog-listing-page">
+        <div class="blog-header">
+            <h2>Blog Posts</h2>
+            <button class="create-post-btn" onclick="location.href='create_post.html'">Create New Post</button>
+        </div>
+        <div class="filter-section">
+            <label for="sort">Sort by:</label>
+            <select id="sort" name="sort">
+                <option value="top">Top (Highest Ranked)</option>
+                <option value="new">New (Recent Posts)</option>
+            </select>
+        </div>
+
+        <div class="blog-feed">
+            <!-- Fake Posts -->
+            <div class="post-card">
+                <div class="post-meta">
+                    <img src="../images/user1.png" class="user-avatar" alt="User">
+                    <span class="username">RandAlThor</span>
+                    <span class="post-date">2 hours ago</span>
+                </div>
+                <h3><a href="post1.html">The One Power Explained</a></h3>
+                <p>Ever wondered how Saidin and Saidar work? Here’s an in-depth breakdown of channeling...</p>
+                <div class="post-actions">
+                    <button class="vote upvote">⬆ 120</button>
+                    <button class="vote downvote">⬇</button>
+                    <span class="comments">45 Comments</span>
+                </div>
+            </div>
+
+            <div class="post-card">
+                <div class="post-meta">
+                    <img src="../images/user2.png" class="user-avatar" alt="User">
+                    <span class="username">MoiraineSedai</span>
+                    <span class="post-date">5 hours ago</span>
+                </div>
+                <h3><a href="post2.html">Why The Wheel Weaves As It Wills</a></h3>
+                <p>The Pattern is a mysterious force, but how does it actually shape the world of WoT?</p>
+                <div class="post-actions">
+                    <button class="vote upvote">⬆ 85</button>
+                    <button class="vote downvote">⬇</button>
+                    <span class="comments">30 Comments</span>
+                </div>
+            </div>
+            <div class="post-card">
+                <div class="post-meta">
+                    <img src="../images/user3.png" class="user-avatar" alt="User">
+                    <span class="username">LoreMaster42</span>
+                    <span class="post-date">3 hours ago</span>
+                </div>
+                <h3><a href="post3.html">The Symbolism of the Aes Sedai Rings</a></h3>
+                <p>What do the Great Serpent rings truly represent? A deep dive into their meaning and significance.</p>
+                <div class="post-actions">
+                    <button class="vote upvote">⬆ 72</button>
+                    <button class="vote downvote">⬇</button>
+                    <span class="comments">25 Comments</span>
+                </div>
+            </div>
+
+            <div class="post-card">
+                <div class="post-meta">
+                    <img src="../images/user4.png" class="user-avatar" alt="User">
+                    <span class="username">TavernTales</span>
+                    <span class="post-date">7 hours ago</span>
+                </div>
+                <h3><a href="post4.html">The Role of Prophecy in WoT</a></h3>
+                <p>From the Dragon Reborn to the Karaethon Cycle, how do prophecies drive the narrative forward?</p>
+                <div class="post-actions">
+                    <button class="vote upvote">⬆ 63</button>
+                    <button class="vote downvote">⬇</button>
+                    <span class="comments">18 Comments</span>
+                </div>
+            </div>
+
+            <div class="post-card">
+                <div class="post-meta">
+                    <img src="../images/user5.png" class="user-avatar" alt="User">
+                    <span class="username">ShadowWatcher</span>
+                    <span class="post-date">10 hours ago</span>
+                </div>
+                <h3><a href="post5.html">Exploring the Dark One's Influence</a></h3>
+                <p>How does the Dark One's touch corrupt the world, and what does it mean for the Last Battle?</p>
+                <div class="post-actions">
+                    <button class="vote upvote">⬆ 91</button>
+                    <button class="vote downvote">⬇</button>
+                    <span class="comments">42 Comments</span>
+                </div>
+            </div>
+
+            <div class="post-card">
+                <div class="post-meta">
+                    <img src="../images/user6.png" class="user-avatar" alt="User">
+                    <span class="username">ThreadWeaver</span>
+                    <span class="post-date">1 day ago</span>
+                </div>
+                <h3><a href="post6.html">The Power of Saidin and Saidar</a></h3>
+                <p>What makes the male and female halves of the One Power so unique, and how do they shape the world?</p>
+                <div class="post-actions">
+                    <button class="vote upvote">⬆ 78</button>
+                    <button class="vote downvote">⬇</button>
+                    <span class="comments">35 Comments</span>
+                </div>
+            </div>
+
+            <div class="post-card">
+                <div class="post-meta">
+                    <img src="../images/user7.png" class="user-avatar" alt="User">
+                    <span class="username">DreamWalker</span>
+                    <span class="post-date">2 days ago</span>
+                </div>
+                <h3><a href="post7.html">Tel'aran'rhiod: The World of Dreams</a></h3>
+                <p>Unraveling the mysteries of the Unseen World and its impact on the characters and plot.</p>
+                <div class="post-actions">
+                    <button class="vote upvote">⬆ 102</button>
+                    <button class="vote downvote">⬇</button>
+                    <span class="comments">50 Comments</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-about">
+            <h3>About This Blog</h3>
+            <p>The Wheel of Time Blog is a space for fans to explore, discuss, and share insights about the beloved series. Whether you're analyzing deep lore, debating theories, or reviewing episodes and books, this is your home for all things Wheel of Time.</p>
+        </div>
+        <div class="footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blog.html">Blog Posts</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-contact">
+            <h3>Contact Us</h3>
+            <p>Email: support@wheeloftimeblog.com</p>
+            <p>Follow us on <a href="#">Twitter</a> | <a href="#">Facebook</a>  | <a href="#">Instagram </a></p>
+        </div>
+    </footer>
+</body>
+</html>
