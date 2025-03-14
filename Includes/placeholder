@@ -1,0 +1,123 @@
+<?php
+
+class Page
+{
+    
+    /** @var string The page <title> text displayed in the browser tab. */
+    public $title = "Default Title";
+
+    /** 
+     * @var string Allows you to append additional <link> or <script> tags 
+     * in the <head> section for each specific page.
+     */
+    public $cssScripts = "";
+    
+    /** 
+     * @var string The header content (e.g., the top logo, nav links, user menu).
+     * This is placed inside <header>...</header>.
+     */
+    public $headerContent = "";
+
+    /**
+     * @var string The HTML that makes up the sidebar / navigation portion.
+     * This is placed inside the .w3-sidebar container.
+     */
+    public $sidebarContent = "";
+    
+    /**
+     * @var string The main page content unique to each page.
+     * This is placed inside <main>...</main>.
+     */
+    public $content = "";
+
+    /**
+     * @var string The HTML for your footer portion 
+     * (placed inside <footer>...</footer>).
+     */
+    public $footerContent = "";
+
+    // --[ Public Methods ]---------------------------------------------------//
+
+    /**
+     * Displays the entire web page by calling methods
+     * for the head, header, sidebar, content, and footer.
+     */
+    public function Display()
+    {
+        // 1) Output <html>, <head>, <body>, and the top header section
+        $this->DisplayHeader();
+
+        // 2) Output the sidebar navigation
+        $this->DisplaySidebar();
+
+        // 3) Output the main content
+        $this->DisplayContent();
+
+        // 4) Output the footer and close the HTML
+        $this->DisplayFooter();
+    }
+
+    // --[ Protected / Helper Methods ]---------------------------------------//
+
+    /**
+     * Outputs <html>, <head>, <body>, plus the page's <header>.
+     */
+    protected function DisplayHeader()
+    {
+        echo "<!DOCTYPE html>\n";
+        echo "<html lang='en'>\n";
+        echo "<head>\n";
+        echo "  <meta charset='UTF-8'>\n";
+        echo "  <meta name='viewport' content='width=device-width, initial-scale=1.0'>\n";
+        echo "  <title>" . $this->title . "</title>\n";
+
+        // Place any additional CSS or script tags
+        echo "  " . $this->cssScripts . "\n";
+
+        echo "</head>\n";
+        echo "<body>\n";
+
+        // The top header portion
+        echo "<header class='header'>\n";
+        echo $this->headerContent;
+        echo "</header>\n";
+    }
+
+    /**
+     * Outputs the .w3-sidebar content plus the '☰ Menu' button container.
+     */
+    protected function DisplaySidebar()
+    {
+        echo "<div class='w3-sidebar w3-bar-block w3-card w3-animate-left' id='mySidebar'>\n";
+        // The button to close the sidebar
+        echo "  <button type='button' onclick='closeSidebar()' class='w3-bar-item w3-button w3-large'>Close &times;</button>\n";
+        
+        // Insert your custom sidebar HTML (nav links, etc.)
+        echo $this->sidebarContent;
+        echo "</div>\n";
+
+        // The button that opens the sidebar
+        echo "<div class='w3-container'>\n";
+        echo "  <button type='button' class='w3-button w3-gray' onclick='openSidebar()'>☰ Menu</button>\n";
+        echo "</div>\n";
+    }
+
+    /**
+     * Outputs the main page content inside a <main> element.
+     */
+    protected function DisplayContent()
+    {
+        echo $this->content;
+    }
+
+    /**
+     * Outputs the footer, then closes the <body> and <html> tags.
+     */
+    protected function DisplayFooter()
+    {
+        echo $this->footerContent;
+        echo "\n</body>\n</html>\n";
+    }
+}
+?>
+
