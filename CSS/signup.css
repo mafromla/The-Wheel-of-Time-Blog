@@ -1,14 +1,26 @@
-/* Sign Up Form Styles */
-.content {
+/* signup.css */
+
+.signup-form {
     max-width: 400px;
     margin: 50px auto;
     padding: 20px;
     background: white;
     border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-input[type=text], input[type=password] {
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  .signup-form h2,
+  .signup-form p {
+    text-align: center;
+    margin: 0 0 16px;
+  }
+  
+  .signup-form .container {
+    padding: 0;
+  }
+  
+  .signup-form input[type="text"],
+  .signup-form input[type="password"] {
     width: 100%;
     padding: 12px;
     margin: 8px 0;
@@ -16,39 +28,41 @@ input[type=text], input[type=password] {
     box-sizing: border-box;
     border-radius: 4px;
     background: #f9f9f9;
-}
-
-input[type=text]:focus, input[type=password]:focus {
+  }
+  
+  .signup-form input[type="text"]:focus,
+  .signup-form input[type="password"]:focus {
     background-color: #e8e8e8;
     outline: none;
-}
-
-button {
+  }
+  
+  /* Sign Up button */
+  .signup-form button.signupbtn {
     background-color: #333;
     color: white;
     padding: 14px 20px;
-    margin: 8px 0;
+    margin: 16px 0;
     border: none;
     cursor: pointer;
     width: 100%;
     border-radius: 4px;
     font-size: 16px;
-}
-
-button:hover {
+  }
+  
+  .signup-form button.signupbtn:hover {
     opacity: 0.9;
-}
-
-.container {
-    padding: 16px;
-}
-
-/* Terms and Login Link */
-p a {
+  }
+  
+  .signup-form label input[type="checkbox"] {
+    margin-right: 8px;
+  }
+  
+  .signup-form p a {
     color: dodgerblue;
     text-decoration: none;
-}
-
-p a:hover {
+  }
+  
+  .signup-form p a:hover {
     text-decoration: underline;
-}
+  }
+  
