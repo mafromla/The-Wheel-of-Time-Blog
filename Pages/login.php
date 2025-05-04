@@ -1,23 +1,51 @@
 <?php
 require_once('../includes/Page.class.php');
+require_once('../includes/database.php');
+$db = new Database();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $input    = trim($_POST['username'] ?? '');
+    $password = $_POST['password'] ?? '';
+
+    if (!$input || !$password) {
+        die('Please enter both username/email and password.');
+    }
+
+    $rows = $db->findUserBy('username', $input);
+    if (!$rows) {
+        $rows = $db->findUserBy('email', $input);
+    }
+
+    if (!$rows || !password_verify($password, $rows[0]['password_hash'])) {
+        die('Invalid login credentials.');
+    }
+
+    $user = $rows[0];
+    $_SESSION['user_id']  = $user['user_id'];
+    $_SESSION['username'] = $user['username'];
+    $_SESSION['role_id']  = $user['role_id'];
+
+    header('Location: dashboard.php');
+    exit;
+}
 
 $page = new Page();
 
-
-$page->title = "Home - The Wheel of Time Blog";
+$page->title = "Login - The Wheel of Time Blog";
 $page->cssScripts = "
-    <link rel='stylesheet' href='../css/styles.css'>
+    <link rel='stylesheet' href='../CSS/styles.css'>
+    <link rel='stylesheet' href='../CSS/login.css'>
     <script src='../js/script.js' defer></script>
     <link rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css'>
 ";
 
 $page->headerContent = "
     <a href='index.php'>
-        <img src='../images/wot_logo.jpg' alt='The Wheel of Time Blog' class='logo'>
+        <img src='../Images/WOT_Logo.jpg' alt='The Wheel of Time Blog' class='logo'>
     </a>
     <div class='header-text'>
         <h1>The Wheel of Time Blog</h1>
-        <p class='subtitle'>Explore, Discuss, and Learn</p>
+        <p class='subtitle'>Log Into Your Account</p>
     </div>
     <div class='user-menu'>
         <span id='usernameDisplay'>Guest</span>
@@ -40,44 +68,24 @@ $page->sidebarContent = "
 ";
 
 $page->content = "
-    <main class='content home-page'>
-        <h2>Welcome to The Wheel of Time Blog</h2>
-        <p>Dive into discussions, share insights, and explore the world of The Wheel of Time.</p>
-
-        <section class='featured-posts'>
-            <h3>Featured Posts</h3>
-            <div class='post-card'>
-                <h3 class='post-title'><a href='post1.php'>The One Power Explained</a></h3>
-                <p>Understanding the Two Halves of the One Power and their impact on the world.</p>
+    <main class='content'>
+        <h2>Login</h2>
+        <form action='login.php' method='post'>
+            <div class='container'>
+                <label for='uname'><b>Username</b></label>
+                <input type='text' placeholder='Enter Username' name='uname' required>
+                <label for='psw'><b>Password</b></label>
+                <input type='password' placeholder='Enter Password' name='psw' required>
+                <button type='submit'>Login</button>
+                <div class='remember-forgot'>
+                    <label>
+                        <input type='checkbox' checked='checked' name='remember'> Remember me
+                    </label>
+                    <span class='psw'><a href='#'>Forgot password?</a></span>
+                </div>
             </div>
-        </section>
-
-        <!-- Slideshow -->
-        <div class='slideshow-container'>
-            <div class='mySlides fade'>
-                <img src='../Images/01-The-Eye-of-the-World-outside.jpg' class='full-width-img' alt=''>
-            </div>
-            <div class='mySlides fade'>
-                <img src='../images/08-Path-of-Daggers.jpg' class='full-width-img' alt=''>
-            </div>
-            <div class='mySlides fade'>
-                <img src='../Images/14-A-Memory-of-Light.jpg' class='full-width-img' alt=''>
-            </div>
-            <div class='mySlides fade'>
-                <img src='../Images/Lord_of_Chaos_ebook_wraparound.png' class='full-width-img' alt=''>
-            </div>
-            <div class='mySlides fade'>
-                <img src='../Images/the-gathering-storm-banner-1.jpg' class='full-width-img' alt=''>
-            </div>
-        </div>
-
-        <div class='dots-container'>
-            <span class='dot'></span>
-            <span class='dot'></span>
-            <span class='dot'></span>
-            <span class='dot'></span>
-            <span class='dot'></span>
-        </div>
+        </form>
+        <p>Don't have an account? <a href='signup.php'>Sign Up</a></p>
     </main>
 ";
 
@@ -102,6 +110,7 @@ $page->footerContent = "
             <p>Follow us on <a href='#'>Twitter</a> | <a href='#'>Facebook</a> | <a href='#'>Instagram</a></p>
         </div>
     </footer>
+    
 ";
 
 $page->Display();

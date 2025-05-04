@@ -1,23 +1,22 @@
 <?php
 require_once('../includes/Page.class.php');
-
 $page = new Page();
 
-
-$page->title = "Home - The Wheel of Time Blog";
+$page->title = "Profile - The Wheel of Time Blog";
 $page->cssScripts = "
-    <link rel='stylesheet' href='../css/styles.css'>
-    <script src='../js/script.js' defer></script>
+    <link rel='stylesheet' href='../CSS/styles.css'>
+    <link rel='stylesheet' href='../CSS/profile.css'>
+    <script src='../JS/script.js' defer></script>
     <link rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css'>
 ";
 
 $page->headerContent = "
     <a href='index.php'>
-        <img src='../images/wot_logo.jpg' alt='The Wheel of Time Blog' class='logo'>
+        <img src='../Images/WOT_Logo.jpg' alt='The Wheel of Time Blog' class='logo'>
     </a>
     <div class='header-text'>
         <h1>The Wheel of Time Blog</h1>
-        <p class='subtitle'>Explore, Discuss, and Learn</p>
+        <p class='subtitle'>Manage Your Profile</p>
     </div>
     <div class='user-menu'>
         <span id='usernameDisplay'>Guest</span>
@@ -40,44 +39,27 @@ $page->sidebarContent = "
 ";
 
 $page->content = "
-    <main class='content home-page'>
-        <h2>Welcome to The Wheel of Time Blog</h2>
-        <p>Dive into discussions, share insights, and explore the world of The Wheel of Time.</p>
-
-        <section class='featured-posts'>
-            <h3>Featured Posts</h3>
-            <div class='post-card'>
-                <h3 class='post-title'><a href='post1.php'>The One Power Explained</a></h3>
-                <p>Understanding the Two Halves of the One Power and their impact on the world.</p>
+    <main class='content profile-page'>
+        <h2>Profile</h2>
+        <form action='/update_profile.php' method='post' enctype='multipart/form-data'>
+            <div class='container'>
+                <label for='profile-pic'><b>Profile Picture</b></label>
+                <input type='file' id='profile-pic' name='profile-pic' accept='image/*'>
+                <br>
+                <label for='fname'><b>First Name</b></label>
+                <input type='text' placeholder='Enter First Name' name='fname' required>
+                <label for='lname'><b>Last Name</b></label>
+                <input type='text' placeholder='Enter Last Name' name='lname' required>
+                <label for='email'><b>Email</b></label>
+                <input type='text' placeholder='Enter Email' name='email' required>
+                <label for='bio'><b>About Me</b></label>
+                <textarea placeholder='Tell us about yourself...' name='bio' rows='4'></textarea>
+                <label>
+                    <input type='checkbox' checked='checked' name='notifications'> Enable Email Notifications
+                </label>
+                <button type='submit' class='update-btn'>Update Profile</button>
             </div>
-        </section>
-
-        <!-- Slideshow -->
-        <div class='slideshow-container'>
-            <div class='mySlides fade'>
-                <img src='../Images/01-The-Eye-of-the-World-outside.jpg' class='full-width-img' alt=''>
-            </div>
-            <div class='mySlides fade'>
-                <img src='../images/08-Path-of-Daggers.jpg' class='full-width-img' alt=''>
-            </div>
-            <div class='mySlides fade'>
-                <img src='../Images/14-A-Memory-of-Light.jpg' class='full-width-img' alt=''>
-            </div>
-            <div class='mySlides fade'>
-                <img src='../Images/Lord_of_Chaos_ebook_wraparound.png' class='full-width-img' alt=''>
-            </div>
-            <div class='mySlides fade'>
-                <img src='../Images/the-gathering-storm-banner-1.jpg' class='full-width-img' alt=''>
-            </div>
-        </div>
-
-        <div class='dots-container'>
-            <span class='dot'></span>
-            <span class='dot'></span>
-            <span class='dot'></span>
-            <span class='dot'></span>
-            <span class='dot'></span>
-        </div>
+        </form>
     </main>
 ";
 
@@ -91,7 +73,7 @@ $page->footerContent = "
             <h3>Quick Links</h3>
             <ul>
                 <li><a href='index.php'>Home</a></li>
-                <li><a href='blog.php'>Blog Posts</a></li>
+                <li><a href='../blog.php'>Blog Posts</a></li>
                 <li><a href='profile.php'>Profile</a></li>
                 <li><a href='contact.php'>Contact</a></li>
             </ul>

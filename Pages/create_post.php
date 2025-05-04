@@ -1,19 +1,18 @@
 <?php
 require_once('../includes/Page.class.php');
-
 $page = new Page();
 
-
-$page->title = "Home - The Wheel of Time Blog";
+$page->title = "Blog Post - The Wheel of Time Blog";
 $page->cssScripts = "
     <link rel='stylesheet' href='../css/styles.css'>
+    <link rel='stylesheet' href='../css/create_post.css'>
     <script src='../js/script.js' defer></script>
     <link rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css'>
 ";
 
 $page->headerContent = "
     <a href='index.php'>
-        <img src='../images/wot_logo.jpg' alt='The Wheel of Time Blog' class='logo'>
+        <img src='../Images/WOT_Logo.jpg' alt='The Wheel of Time Blog' class='logo'>
     </a>
     <div class='header-text'>
         <h1>The Wheel of Time Blog</h1>
@@ -40,44 +39,21 @@ $page->sidebarContent = "
 ";
 
 $page->content = "
-    <main class='content home-page'>
-        <h2>Welcome to The Wheel of Time Blog</h2>
-        <p>Dive into discussions, share insights, and explore the world of The Wheel of Time.</p>
-
-        <section class='featured-posts'>
-            <h3>Featured Posts</h3>
-            <div class='post-card'>
-                <h3 class='post-title'><a href='post1.php'>The One Power Explained</a></h3>
-                <p>Understanding the Two Halves of the One Power and their impact on the world.</p>
+    <main class='content blog-post-page'>
+        <h2>Create a New Blog Post</h2>
+        <form action='/submit_post.php' method='post' enctype='multipart/form-data'>
+            <div class='container'>
+                <label for='post-title'><b>Title</b></label>
+                <input type='text' placeholder='Enter Post Title' name='post-title' required>
+                <label for='post-topics'><b>Topics</b></label>
+                <input type='text' placeholder='Enter Topics (comma-separated)' name='post-topics' required>
+                <label for='post-media'><b>Media (Image, Video, Audio)</b></label>
+                <input type='file' id='post-media' name='post-media' accept='image/*,video/*,audio/*'>
+                <label for='post-content'><b>Content</b></label>
+                <textarea placeholder='Write your story here...' name='post-content' rows='6' required></textarea>
+                <button type='submit' class='submit-post-btn'>Publish Post</button>
             </div>
-        </section>
-
-        <!-- Slideshow -->
-        <div class='slideshow-container'>
-            <div class='mySlides fade'>
-                <img src='../Images/01-The-Eye-of-the-World-outside.jpg' class='full-width-img' alt=''>
-            </div>
-            <div class='mySlides fade'>
-                <img src='../images/08-Path-of-Daggers.jpg' class='full-width-img' alt=''>
-            </div>
-            <div class='mySlides fade'>
-                <img src='../Images/14-A-Memory-of-Light.jpg' class='full-width-img' alt=''>
-            </div>
-            <div class='mySlides fade'>
-                <img src='../Images/Lord_of_Chaos_ebook_wraparound.png' class='full-width-img' alt=''>
-            </div>
-            <div class='mySlides fade'>
-                <img src='../Images/the-gathering-storm-banner-1.jpg' class='full-width-img' alt=''>
-            </div>
-        </div>
-
-        <div class='dots-container'>
-            <span class='dot'></span>
-            <span class='dot'></span>
-            <span class='dot'></span>
-            <span class='dot'></span>
-            <span class='dot'></span>
-        </div>
+        </form>
     </main>
 ";
 

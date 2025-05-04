@@ -1,16 +1,14 @@
 <?php
 require_once('../includes/Page.class.php');
-
 $page = new Page();
 
-
-$page->title = "Home - The Wheel of Time Blog";
+$page->title = "Tel'aran'rhiod: The World of Dreams - The Wheel of Time Blog";
 $page->cssScripts = "
     <link rel='stylesheet' href='../css/styles.css'>
+    <link rel='stylesheet' href='../css/post1.css'>
     <script src='../js/script.js' defer></script>
     <link rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css'>
 ";
-
 $page->headerContent = "
     <a href='index.php'>
         <img src='../images/wot_logo.jpg' alt='The Wheel of Time Blog' class='logo'>
@@ -30,7 +28,6 @@ $page->headerContent = "
         </div>
     </div>
 ";
-
 $page->sidebarContent = "
     <a href='index.php' class='w3-bar-item w3-button custom-home-btn'>Home</a>
     <a href='blog.php' class='w3-bar-item w3-button'>Blog Posts</a>
@@ -38,49 +35,60 @@ $page->sidebarContent = "
     <a href='create_post.php' class='w3-bar-item w3-button'>Create Blog Post</a>
     <a href='dashboard.php' class='w3-bar-item w3-button'>Dashboard</a>
 ";
-
 $page->content = "
-    <main class='content home-page'>
-        <h2>Welcome to The Wheel of Time Blog</h2>
-        <p>Dive into discussions, share insights, and explore the world of The Wheel of Time.</p>
+    <main class='content post-page'>
+      <div class='text-post'>
+        <div class='post-meta'>
+          <img src='.../Images/images.1.webp' class='user-avatar' alt='User'>
+          <span class='username'>DreamWalker</span>
+          <span class='post-date'>2 days ago</span>
+        </div>
+        <h2>Tel'aran'rhiod: The World of Dreams</h2>
+        <p>
+          Tel'aran'rhiod, the World of Dreams, is a realm where reality and imagination intertwine. In this post, we journey into the depths of this alternate world—a place where thoughts become tangible and time flows differently. Discover how this mystical realm shapes the actions and destinies of those who dare enter its mysterious corridors.
+        </p>
+        <div class='post-actions'>
+          <button class='vote upvote'>⬆ 102</button>
+          <button class='vote downvote'>⬇</button>
+          <span class='comments'>50 Comments</span>
+        </div>
+      </div>
 
-        <section class='featured-posts'>
-            <h3>Featured Posts</h3>
-            <div class='post-card'>
-                <h3 class='post-title'><a href='post1.php'>The One Power Explained</a></h3>
-                <p>Understanding the Two Halves of the One Power and their impact on the world.</p>
+    
+            <!-- Comment Section -->
+        <div class='comments-section'>
+            <h3>Comments</h3>
+            <div class='comment'>
+                <img src='../Images/images.2.webp' class='user-avatar' alt='User'>
+                <div class='comment-text'>
+                    <span class='username'>StormCaller</span>
+                    <p>This was a great read! I love how the balance between Saidin and Saidar is described.</p>
+                </div>
             </div>
-        </section>
-
-        <!-- Slideshow -->
-        <div class='slideshow-container'>
-            <div class='mySlides fade'>
-                <img src='../Images/01-The-Eye-of-the-World-outside.jpg' class='full-width-img' alt=''>
+            <div class='comment'>
+                <img src='../Images/imagesa d.webp' class='user-avatar' alt='User'>
+                <div class='comment-text'>
+                    <span class='username'>PatternWeaver</span>
+                    <p>I still think balefire is the most interesting weave. What do you think?</p>
+                </div>
             </div>
-            <div class='mySlides fade'>
-                <img src='../images/08-Path-of-Daggers.jpg' class='full-width-img' alt=''>
-            </div>
-            <div class='mySlides fade'>
-                <img src='../Images/14-A-Memory-of-Light.jpg' class='full-width-img' alt=''>
-            </div>
-            <div class='mySlides fade'>
-                <img src='../Images/Lord_of_Chaos_ebook_wraparound.png' class='full-width-img' alt=''>
-            </div>
-            <div class='mySlides fade'>
-                <img src='../Images/the-gathering-storm-banner-1.jpg' class='full-width-img' alt=''>
+            <div class='comment'>
+                <img src='../Images/imagesa d.webp' class='user-avatar' alt='User'>
+                <div class='comment-text'>
+                    <span class='username'>ThreadSeeker</span>
+                    <p>The healing weaves always fascinated me. Such a powerful yet delicate ability.</p>
+                </div>
             </div>
         </div>
-
-        <div class='dots-container'>
-            <span class='dot'></span>
-            <span class='dot'></span>
-            <span class='dot'></span>
-            <span class='dot'></span>
-            <span class='dot'></span>
+        <div class='comment-form'>
+            <h3>Leave a Comment</h3>
+            <textarea placeholder='Write your comment...' name='comment-text' rows='3'></textarea>
+            <button class='submit-comment-btn'>Submit</button>
         </div>
+
+    
     </main>
 ";
-
 $page->footerContent = "
     <footer class='footer'>
         <div class='footer-about'>
@@ -103,6 +111,5 @@ $page->footerContent = "
         </div>
     </footer>
 ";
-
 $page->Display();
 ?>
