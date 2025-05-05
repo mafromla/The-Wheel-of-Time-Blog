@@ -1,12 +1,20 @@
 <?php
+require_once(__DIR__ . '/config.php');
+
 class Page
 {
+    public $root;
     public $title = "Default Title";
     public $cssScripts = "";
     public $headerContent = "";
     public $sidebarContent = "";
     public $content = "";
     public $footerContent = "";
+
+    public function __construct() {
+        global $root;
+        $this->root = $root;
+    }
 
     public function Display()
     {

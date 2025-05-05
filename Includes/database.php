@@ -1,18 +1,15 @@
 <?php
+require_once(__DIR__ . '/config.php');
+
 class Database {
-    private $user;
-    private $password;
-    private $db;
-    private $server;
     private $connection;
 
-    // Default constructor
     public function __construct() {
-        $this->user = 'bloguser';
-        $this->password = 'p@ssword';
-        $this->db = 'maliblog';
-        $this->server = 'localhost';
-        $this->connect();
+        $this->connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+        if ($this->connection->connect_error) {
+            die("Connection failed: " . $this->connection->connect_error);
+        }
     }
 
     // Manual constructor
@@ -89,8 +86,8 @@ class Database {
     }
 
     // ========== PROFILES ==========
-    public function getProfile($id) {
-        return $this->queryArray("SELECT * FROM Profiles WHERE profile_id = " . intval($id));
+    public function getProfile($user_id) {
+        return $this->queryArray("SELECT * FROM Profiles WHERE user_id = " . intval($user_id));
     }
 
     public function getAllProfiles() {
@@ -211,6 +208,16 @@ class Database {
         return $this->query("DELETE FROM Rankings WHERE ranking_id = " . intval($id));
     }
 
+    public function getVoteScore($post_id) {
+        $sql = "
+            SELECT 
+                SUM(CASE WHEN vote_type = 'up' THEN 1 WHEN vote_type = 'down' THEN -1 ELSE 0 END) AS score
+            FROM Rankings
+            WHERE post_id = " . intval($post_id);
+        $result = $this->queryArray($sql);
+        return $result[0]['score'] ?? 0;
+    }
+
     // Shared dynamic update method
     private function dynamicUpdate($table, $keyColumn, $id, $updates) {
         $set = [];
@@ -223,5 +230,41 @@ class Database {
         $sql = "UPDATE $table SET $setString WHERE $keyColumn = " . intval($id);
         return $this->query($sql);
     }
+
+    // POSTS
+    public function getAllPostsWithAuthor() {
+        $sql = "
+            SELECT p.*, u.username, pr.profile_picture
+            FROM Posts p
+            JOIN Users u ON p.user_id = u.user_id
+            LEFT JOIN Profiles pr ON pr.user_id = u.user_id
+            ORDER BY p.created_at DESC
+        ";
+        return $this->queryArray($sql);
+    }
+
+    // VOTES
+    public function getUserVote($userId, $postId) {
+        $query = "SELECT vote_type FROM Rankings WHERE user_id = ? AND post_id = ?";
+        $stmt = $this->connection->prepare($query);
+        $stmt->bind_param("ii", $userId, $postId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        return $row['vote_type'] ?? null;
+    }
+
+    // COMMENTS
+    public function getCommentsByPost($postId) {
+        $postId = intval($postId);
+        $sql = "SELECT * FROM Comments WHERE post_id = $postId ORDER BY created_at ASC";
+        return $this->queryArray($sql);
+    }
+    
+    // ========== TOPICS ==========
+    public function getAllTopics() {
+        return $this->queryArray("SELECT topic_id, name FROM Topics");
+    }
+    
 }
 ?>
