@@ -12,31 +12,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password2 = $_POST['password2'] ?? '';
 
     if (!$username || !$email || !$password || !$password2) {
-        die('Please fill in all fields.');
+        die('All fields are required.');
     }
+
     if ($password !== $password2) {
         die('Passwords do not match.');
     }
 
+    // Check for existing user
     if ($db->findUserBy('username', $username)) {
         die('Username already exists.');
     }
+
     if ($db->findUserBy('email', $email)) {
         die('Email already exists.');
     }
 
+    // Hash and insert
     $hash = password_hash($password, PASSWORD_DEFAULT);
-    if (!$db->addUser($username, $email, $hash)) {
-        die('Error creating user.');
-    }
+    $db->addUser($username, $email, $hash);
 
+    // Fetch new user
     $user = $db->findUserBy('username', $username)[0];
 
-    $_SESSION['user_id'] = $user['user_id'];
+    // Store session
+    $_SESSION['user_id']  = $user['user_id'];
     $_SESSION['username'] = $user['username'];
-    $_SESSION['role_id'] = $user['role_id'];
+    $_SESSION['role_id']  = $user['role_id'];
 
-    header('Location: dashboard.php');
+    header('Location: index.php');
     exit;
 }
 
@@ -52,7 +56,7 @@ $page->cssScripts = "
 
 $page->headerContent = "
     <a href='index.php'>
-        <img src='../Images/WOT_Logo.jpg' alt='The Wheel of Time Blog' class='logo'>
+        <img src='../Images/WOT_Logo.png' alt='The Wheel of Time Blog' class='logo'>
     </a>
     <div class='header-text'>
         <h1>The Wheel of Time Blog</h1>
@@ -72,14 +76,13 @@ $page->sidebarContent = "
 $page->content = <<<HTML
 <main class="content signup-form">
     <h2>Sign Up</h2>
-    <p>Please fill in this form to create an account.</p>
     <form action="signup.php" method="post">
         <div class="container">
             <label for="username"><b>Username</b></label>
             <input type="text" placeholder="Enter Username" name="username" required>
 
             <label for="email"><b>Email</b></label>
-            <input type="email" placeholder="Enter Email" name="email" required>
+            <input type="email" placeholder="Enter Email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address.">
 
             <label for="password"><b>Password</b></label>
             <input type="password" placeholder="Enter Password" name="password" required>
@@ -87,11 +90,6 @@ $page->content = <<<HTML
             <label for="password2"><b>Repeat Password</b></label>
             <input type="password" placeholder="Repeat Password" name="password2" required>
 
-            <label>
-                <input type="checkbox" checked="checked" name="remember"> Remember me
-            </label>
-
-            <p>By creating an account you agree to our <a href="#">Terms &amp; Privacy</a>.</p>
             <button type="submit" class="signupbtn">Sign Up</button>
         </div>
     </form>

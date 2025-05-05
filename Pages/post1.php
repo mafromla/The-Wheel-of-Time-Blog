@@ -1,5 +1,7 @@
 <?php
+session_start(); // Must be first
 require_once('../includes/Page.class.php');
+
 $page = new Page();
 
 $page->title = "The One Power Explained - The Wheel of Time Blog";
@@ -10,21 +12,30 @@ $page->cssScripts = "
     <link rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css'>
 ";
 
+// Dynamic user name display
+$username = isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Guest';
+
+// Dynamic auth link: Login or Logout
+$authLink = isset($_SESSION['user_id'])
+    ? "<a href='logout.php'>Sign Out</a>"
+    : "<a href='login.php'>Login</a>";
+
+// Header with dynamic content
 $page->headerContent = "
     <a href='index.php'>
-        <img src='../images/wot_logo.jpg' alt='The Wheel of Time Blog' class='logo'>
+        <img src='../Images/WOT_Logo.png' alt='The Wheel of Time Blog' class='logo'>
     </a>
     <div class='header-text'>
         <h1>The Wheel of Time Blog</h1>
         <p class='subtitle'>Explore, Discuss, and Learn</p>
     </div>
     <div class='user-menu'>
-        <span id='usernameDisplay'>Guest</span>
+        <span id='usernameDisplay'>{$username}</span>
         <div class='dropdown'>
             <button class='dropdown-btn' type='button'>▼</button>
             <div class='dropdown-content'>
                 <a href='profile.php'>Profile</a>
-                <a href='login.php'>Login</a>
+                {$authLink}
             </div>
         </div>
     </div>

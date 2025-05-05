@@ -1,8 +1,8 @@
 <?php
+session_start(); 
 require_once('../includes/Page.class.php');
 
 $page = new Page();
-
 
 $page->title = "Home - The Wheel of Time Blog";
 $page->cssScripts = "
@@ -11,25 +11,35 @@ $page->cssScripts = "
     <link rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css'>
 ";
 
+// Dynamic user name display
+$username = isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Guest';
+
+// Dynamic auth link: Login or Logout
+$authLink = isset($_SESSION['user_id'])
+    ? "<a href='logout.php'>Sign Out</a>"
+    : "<a href='login.php'>Login</a>";
+
+// Header with dynamic content
 $page->headerContent = "
     <a href='index.php'>
-        <img src='../images/wot_logo.jpg' alt='The Wheel of Time Blog' class='logo'>
+        <img src='../Images/WOT_Logo.png' alt='The Wheel of Time Blog' class='logo'>
     </a>
     <div class='header-text'>
         <h1>The Wheel of Time Blog</h1>
         <p class='subtitle'>Explore, Discuss, and Learn</p>
     </div>
     <div class='user-menu'>
-        <span id='usernameDisplay'>Guest</span>
+        <span id='usernameDisplay'>{$username}</span>
         <div class='dropdown'>
             <button class='dropdown-btn' type='button'>▼</button>
             <div class='dropdown-content'>
                 <a href='profile.php'>Profile</a>
-                <a href='login.php'>Login</a>
+                {$authLink}
             </div>
         </div>
     </div>
 ";
+
 
 $page->sidebarContent = "
     <a href='index.php' class='w3-bar-item w3-button custom-home-btn'>Home</a>
@@ -47,10 +57,23 @@ $page->content = "
         <section class='featured-posts'>
             <h3>Featured Posts</h3>
             <div class='post-card'>
-                <h3 class='post-title'><a href='post1.php'>The One Power Explained</a></h3>
+                <h3 class='post-title'><a href='post.php?id=1'>The One Power Explained</a></h3>
                 <p>Understanding the Two Halves of the One Power and their impact on the world.</p>
             </div>
         </section>
+
+        <div class='browse-topics'>
+            <h2>Browse by Topic</h2>
+            <div class='topic-grid'>
+                <a href='blog.php?topic_id=1' class='topic-card'>The One Power & Magic System</a>
+                <a href='blog.php?topic_id=2' class='topic-card'>The Ajahs of the Aes Sedai</a>
+                <a href='blog.php?topic_id=3' class='topic-card'>The Forsaken & Dark One’s Forces</a>
+                <a href='blog.php?topic_id=4' class='topic-card'>Cultures & Nations of Randland</a>
+                <a href='blog.php?topic_id=5' class='topic-card'>Ta’veren & Prophecies</a>
+                <a href='blog.php?topic_id=6' class='topic-card'>Epic Battles & Military Strategy</a>
+                <a href='blog.php?topic_id=7' class='topic-card'>Philosophy & Themes of the Wheel</a>
+            </div>
+        </div>
 
         <!-- Slideshow -->
         <div class='slideshow-container'>

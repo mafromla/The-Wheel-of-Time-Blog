@@ -1,8 +1,7 @@
 <?php
-require_once('../includes/Page.class.php');
-require_once('../includes/Database.class.php');
 session_start();
-echo "Welcome, " . $_SESSION['username'];
+require_once('../includes/Page.class.php');
+
 $page = new Page();
 
 $page->title = "Dashboard - The Wheel of Time Blog";
@@ -13,31 +12,34 @@ $page->cssScripts = "
     <link rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css'>
 ";
 
-$page->content = '
-    <main class="content">
-        <h2>Login</h2>
-        <form action="login.php" method="post">
-            <div class="container">
-                <label for="username"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="username" required>
+// Dynamic user name display
+$username = isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Guest';
 
-                <label for="password"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="password" required>
+// Dynamic auth link: Login or Logout
+$authLink = isset($_SESSION['user_id'])
+    ? "<a href='logout.php'>Sign Out</a>"
+    : "<a href='login.php'>Login</a>";
 
-                <button type="submit">Login</button>
-
-                <div class="remember-forgot">
-                    <label>
-                        <input type="checkbox" checked="checked" name="remember"> Remember me
-                    </label>
-                    <span class="psw"><a href="#">Forgot password?</a></span>
-                </div>
+// Header with dynamic content
+$page->headerContent = "
+    <a href='index.php'>
+        <img src='../Images/WOT_Logo.png' alt='The Wheel of Time Blog' class='logo'>
+    </a>
+    <div class='header-text'>
+        <h1>The Wheel of Time Blog</h1>
+        <p class='subtitle'>Explore, Discuss, and Learn</p>
+    </div>
+    <div class='user-menu'>
+        <span id='usernameDisplay'>{$username}</span>
+        <div class='dropdown'>
+            <button class='dropdown-btn' type='button'>▼</button>
+            <div class='dropdown-content'>
+                <a href='profile.php'>Profile</a>
+                {$authLink}
             </div>
-        </form>
-        <p>Don\'t have an account? <a href="signup.php">Sign Up</a></p>
-    </main>
-';
-
+        </div>
+    </div>
+";
 
 $page->sidebarContent = "
     <a href='index.php' class='w3-bar-item w3-button custom-home-btn'>Home</a>

@@ -11,7 +11,7 @@ $page->cssScripts = "
 ";
 $page->headerContent = "
     <a href='index.php'>
-        <img src='../images/wot_logo.jpg' alt='The Wheel of Time Blog' class='logo'>
+        <img src='../Images/WOT_Logo.png' alt='The Wheel of Time Blog' class='logo'>
     </a>
     <div class='header-text'>
         <h1>The Wheel of Time Blog</h1>

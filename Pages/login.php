@@ -1,11 +1,12 @@
 <?php
+session_start();
 require_once('../includes/Page.class.php');
 require_once('../includes/database.php');
 $db = new Database();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input    = trim($_POST['username'] ?? '');
-    $password = $_POST['password'] ?? '';
+    $password = $_POST['psw'] ?? '';
 
     if (!$input || !$password) {
         die('Please enter both username/email and password.');
@@ -20,14 +21,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die('Invalid login credentials.');
     }
 
+    // Auth success
     $user = $rows[0];
     $_SESSION['user_id']  = $user['user_id'];
     $_SESSION['username'] = $user['username'];
     $_SESSION['role_id']  = $user['role_id'];
 
-    header('Location: dashboard.php');
+    header('Location: index.php');
     exit;
 }
+
 
 $page = new Page();
 
@@ -41,7 +44,7 @@ $page->cssScripts = "
 
 $page->headerContent = "
     <a href='index.php'>
-        <img src='../Images/WOT_Logo.jpg' alt='The Wheel of Time Blog' class='logo'>
+        <img src='../Images/WOT_Logo.png' alt='The Wheel of Time Blog' class='logo'>
     </a>
     <div class='header-text'>
         <h1>The Wheel of Time Blog</h1>
@@ -73,7 +76,7 @@ $page->content = "
         <form action='login.php' method='post'>
             <div class='container'>
                 <label for='uname'><b>Username</b></label>
-                <input type='text' placeholder='Enter Username' name='uname' required>
+                <input type='text' placeholder='Username or Email' name='username' required>
                 <label for='psw'><b>Password</b></label>
                 <input type='password' placeholder='Enter Password' name='psw' required>
                 <button type='submit'>Login</button>
