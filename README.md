@@ -18,8 +18,9 @@ This document is written for Professor Kenji to verify every feature quickly.
 | `/Pages/edit_user.php?id=x`        | Profile edit (self or other) | Yes | Admin **or** owner |
 | `/Pages/dashboard.php`             | **Admin‑only** control panel | Yes | **Admin only** |
 
-> **Admin credentials:** `admin / admin`  
-> **Standard user:** `rand / rand`
+> **Admin credentials:** `admin / admin`
+> **Poster credentials:** `poster / p@ssword`
+> **Standard user:** `user / p@ssword`
 
 ---
 
