@@ -35,6 +35,22 @@
     background-color: #e8e8e8;
     outline: none;
   }
+
+  /* Add styling for email input */
+  .signup-form input[type="email"] {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 4px;
+    background: #f9f9f9;
+  }
+  
+  .signup-form input[type="email"]:focus {
+    background-color: #e8e8e8;
+    outline: none;
+  }
   
   /* Sign Up button */
   .signup-form button.signupbtn {
@@ -65,4 +81,19 @@
   .signup-form p a:hover {
     text-decoration: underline;
   }
-  
+
+/* Center the header text */
+.header-text {
+    text-align: center;
+}
+
+.header-text h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.header-text .subtitle {
+    font-size: 16px;
+    color: #666;
+}
+

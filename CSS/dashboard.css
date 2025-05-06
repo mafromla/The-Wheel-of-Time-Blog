@@ -35,3 +35,42 @@
     font-weight: bold;
     color: #0079d3;
 }
+
+.access-denied-page {
+    padding: 2rem;
+    text-align: center;
+    background-color: #fff6f6;
+    border: 1px solid #e0b4b4;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 4rem auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.access-denied-page h2 {
+    color: #b30000;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.access-denied-page p {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.access-denied-page a.custom-button {
+    background-color: #833;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.access-denied-page a.custom-button:hover {
+    background-color: #a44;
+}
+

@@ -73,13 +73,57 @@
     border-radius: 5px;
 }
 
+/* Fix comment layout */
 .comment {
     display: flex;
+    justify-content: space-between;
     align-items: flex-start;
-    gap: 10px;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
+    padding: 15px 10px; /* Increased padding for better spacing */
     border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s ease; /* Add hover transition */
+}
+
+.comment:hover {
+    background-color: #f1f1f1; /* Highlight comment on hover */
+}
+
+.comment .comment-text {
+    flex-grow: 1;
+    margin-right: 15px; /* Increased margin for better spacing */
+}
+
+.comment .comment-text .username {
+    font-weight: bold;
+    color: #833;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.comment .comment-text p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+/* Style delete button inline */
+.comment form {
+    margin: 0;
+}
+
+.comment form button {
+    background-color: #e74c3c; /* Updated color for better visibility */
+    color: white;
+    border: none;
+    padding: 8px 12px; /* Adjusted padding for better appearance */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background-color 0.3s ease; /* Add hover transition */
+}
+
+.comment form button:hover {
+    background-color: #c0392b; /* Darker shade on hover */
 }
 
 .comment-text {
@@ -98,33 +142,56 @@
 }
 .comment-form {
     margin-top: 20px;
-    padding: 15px;
-    background: #f9f9f9;
+    padding: 20px; /* Increased padding for better spacing */
+    background: #ffffff; /* Changed to white for better contrast */
+    border: 1px solid #ddd; /* Added border for better definition */
     border-radius: 5px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .comment-form textarea {
     width: 100%;
-    padding: 10px;
+    padding: 12px; /* Increased padding for better usability */
     border: 1px solid #ccc;
     border-radius: 5px;
     resize: vertical;
+    font-size: 14px; /* Increased font size for readability */
 }
 
 .submit-comment-btn {
-    background-color: #833;
+    background-color: #833; 
     color: white;
     border: none;
-    padding: 10px 15px;
+    padding: 12px 18px;
     cursor: pointer;
     font-size: 14px;
     border-radius: 5px;
     margin-top: 10px;
+    transition: background-color 0.3s ease;
 }
 
 .submit-comment-btn:hover {
-    background-color: #622;
-}
+    background-color: #622; 
     margin-bottom: 5px;
 }
+
+.topic-flair {
+    display: inline-block;
+    background-color: #edf2f7;
+    color: #2d3748;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.topic-flair a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+

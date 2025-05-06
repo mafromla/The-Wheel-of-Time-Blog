@@ -107,10 +107,29 @@ body {
 }
 
 .vote:hover {
-    color: #833;
+    color: #555; /* Changed to a more neutral dark gray */
 }
 
 .comments {
     font-size: 14px;
     color: black;
 }
+
+.topic-flair {
+    display: inline-block;
+    background-color: #833;
+    color: #e0f0ff;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.topic-flair:hover {
+    background-color: #bbb; /* Changed to a softer gray */
+    text-decoration: underline;
+}
+
