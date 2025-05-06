@@ -1,12 +1,8 @@
-/* ─────────────────────────────────────────────
-   0.  Create / select database
-   ───────────────────────────────────────────── */
+
 CREATE DATABASE IF NOT EXISTS mali;
 USE mali;
 
-/* ─────────────────────────────────────────────
-   1.  Core lookup tables: Roles  ▸  Topics
-   ───────────────────────────────────────────── */
+
 CREATE TABLE IF NOT EXISTS Roles (
     role_id   INT AUTO_INCREMENT PRIMARY KEY,
     role_name VARCHAR(50) NOT NULL UNIQUE
@@ -33,7 +29,7 @@ INSERT IGNORE INTO Topics (topic_id, name) VALUES
  (7,'Philosophy & Themes of the Wheel');
 
 /* ─────────────────────────────────────────────
-   2.  Users  ▸  Profiles
+     Users  ▸  Profiles
    ───────────────────────────────────────────── */
 CREATE TABLE IF NOT EXISTS Users (
     user_id       INT AUTO_INCREMENT PRIMARY KEY,
@@ -56,21 +52,30 @@ CREATE TABLE IF NOT EXISTS Profiles (
     FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
 
-/* Seed users (bcrypt hashes for “admin” and “rand”; demo hashes already supplied) */
-INSERT IGNORE INTO Users (user_id, username,      email,                       password_hash,                                                                   created_at,             role_id)
+/* Seed users */
+INSERT IGNORE INTO Users 
+  (user_id, username,    email,                         password_hash,                                                                   created_at,             role_id)
 VALUES
- (1,     'admin',        'admin@wheeloftimeblog.com', '$2y$10$naNh/Anpi8jgOVPgm6a9aue6xwyteZUmlXTAMDljyPVTRpRSUGRxS', '2025-04-01 10:00:00', 1),
- (2,     'rand',         'rand@wheeloftimeblog.com',  '$2y$10$qi1XfEPKw.85KvQwRxBBaOmg67HxB1x.Dwh/LMuRbs2sjajUnQUHS', '2025-04-01 10:05:00', 2),
- (3,     'matrim',       'mat@wheeloftimeblog.com',    '4d1aab1940db735b8a63e4c9685b5ec6',                           '2025-04-10 21:25:06', 3),
- (7,     'demo',         'demo@wheeloftimeblog.com',   '$2y$10$K.ilFQ4hl44w6QNTscxlumEsqLfeeg6bgXoTdSZ6r1Il4m4iLImdu', '2025-05-04 12:42:33', 2),
- (8,     'emcarter',     'emily.carter@test.com',      '$2y$10$GEepn23eCAnJE4FMm/2ahOazEPWMq37E4lKdY/tNwzudttrrBzV6', '2025-05-04 19:42:30', 2);
+ (1,     'admin',        'admin@wheeloftimeblog.com',   '$2y$10$naNh/Anpi8jgOVPgm6a9aue6xwyteZUmlXTAMDljyPVTRpRSUGRxS', '2025-04-01 10:00:00', 1),
+ (2,     'rand',         'rand@wheeloftimeblog.com',    '$2y$10$qi1XfEPKw.85KvQwRxBBaOmg67HxB1x.Dwh/LMuRbs2sjajUnQUHS', '2025-04-01 10:05:00', 2),
+ (3,     'matrim',       'mat@wheeloftimeblog.com',      '4d1aab1940db735b8a63e4c9685b5ec6',                           '2025-04-10 21:25:06', 3),
+ (7,     'demo',         'demo@wheeloftimeblog.com',     '$2y$10$K.ilFQ4hl44w6QNTscxlumEsqLfeeg6bgXoTdSZ6r1Il4m4iLImdu', '2025-05-04 12:42:33', 2),
+ (8,     'emcarter',     'emily.carter@test.com',        '$2y$10$GEepn23eCAnJE4FMm/2ahOazEPWMq37E4lKdY/tNwzudttrrBzV6', '2025-05-04 19:42:30', 2),
+ (9,     'poster',       'poster@wheeloftimeblog.com',   '$2y$10$Xz2RtDfq0XcqQXvKU5N3TOQW2pXr0lKw1uC6mbaLHbRtJQbE-fFie', '2025-05-05 09:00:00', 2),
+ (10,    'user',         'user@wheeloftimeblog.com',     '$2y$10$8VdRzSAIvZJZenZBjQcf.eJ3/IuRJV4Ycu3I9b1kHkv3cJzEqCCtG', '2025-05-05 09:05:00', 3)
+;
 
-INSERT IGNORE INTO Profiles (profile_id, user_id, first_name, last_name, bio,                                   profile_picture, notifications_enabled) VALUES
- (1,          1,      'Site',  'Administrator', 'I manage the site.',            'admin_pic.jpg', 1),
- (2,          2,      'Rand',  'al\'Thor',      'The Dragon Reborn.',            'rand_pic.jpg',  1),
- (3,          3,      'Matrim','Cauthon',       'Lover of dice, luck, mischief', 'mat_pic.jpg',   1),
- (4,          7,      'Demo',  'Demo',          'I''m the demo user for the site','Loial.webp',    0),
- (5,          8,      'Emily', 'Carter',        'Red‑Ajah lore enthusiast.',     'Elaida_.webp',   0);
+INSERT IGNORE INTO Profiles 
+  (profile_id, user_id, first_name, last_name,      bio,                                   profile_picture,  notifications_enabled)
+VALUES
+ (1,           1,       'Site',     'Administrator','I manage the site.',                  'admin_pic.jpg',  1),
+ (2,           2,       'Rand',     'al\'Thor',     'The Dragon Reborn.',                  'rand_pic.jpg',   1),
+ (3,           3,       'Matrim',   'Cauthon',      'Lover of dice, luck, mischief',       'mat_pic.jpg',    1),
+ (4,           7,       'Demo',     'Demo',         'I''m the demo user for this site',    'Loial.webp',     0),
+ (5,           8,       'Emily',    'Carter',       'Red‑Ajah lore enthusiast.',           'Elaida_.webp',   0),
+ (6,           9,       'Default',  'Poster',       'Seeded poster account.',              'default.png',    1),
+ (7,           10,      'General',  'User',         'Seeded general-user account.',        'default.png',    1)
+;
 
 /* ─────────────────────────────────────────────
    3.  Posts  ▸  Comments  ▸  Rankings
@@ -190,4 +195,5 @@ INSERT IGNORE INTO Rankings (user_id, post_id, vote_type, created_at) VALUES
  (8, 4, 'up',  '2025-05-04 20:06:53'),
  (8, 1, 'up',  '2025-05-04 20:06:57');
 
+/* 
 
