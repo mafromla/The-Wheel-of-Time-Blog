@@ -46,7 +46,7 @@ $page->sidebarContent = "
     <a href='blog.php' class='w3-bar-item w3-button'>Blog Posts</a>
     <a href='profile.php' class='w3-bar-item w3-button'>User Profiles</a>
     <a href='create_post.php' class='w3-bar-item w3-button'>Create Blog Post</a>
-    <a href='dashboard.php' class='w3-bar-item w3-button'>Dashboard</a>
+    <a href='dashboard.php' class='w3-bar-item w3-button'>Admin Dashboard</a>
 ";
 
 $page->content = "

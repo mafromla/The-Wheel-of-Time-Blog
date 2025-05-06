@@ -70,7 +70,7 @@ $page->sidebarContent = "
     <a href='profile.php'      class='w3-bar-item w3-button'>Profile</a>
     <a href='comments.php'     class='w3-bar-item w3-button'>Comments</a>
     <a href='moderation.php'   class='w3-bar-item w3-button'>Moderation</a>
-    <a href='dashboard.php'    class='w3-bar-item w3-button'>Dashboard</a>
+    <a href='dashboard.php' class='w3-bar-item w3-button'>Admin Dashboard</a>
 ";
 
 $page->content = <<<HTML

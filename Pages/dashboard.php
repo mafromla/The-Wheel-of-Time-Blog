@@ -1,33 +1,62 @@
 <?php
 session_start();
 require_once('../includes/Page.class.php');
+require_once('../includes/database.php');
+
+// Role check
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit;
+}
+
+if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 1) {
+    $page = new Page();
+    $page->title = "Access Denied";
+    $page->cssScripts = "
+        <link rel='stylesheet' href='../css/styles.css'>
+        <script src='../js/script.js' defer></script>
+    ";
+
+    $page->headerContent = "<h1>Access Denied</h1>";
+    $page->sidebarContent = ""; 
+    $page->content = "
+        <div class='access-denied-page'>
+            <h2>Access Denied</h2>
+            <p>You do not have access to this page. Admins only.</p>
+            <a class='custom-button' href='index.php'>Return to Homepage</a>
+        </div>
+    ";
+    $page->footerContent = "<footer class='footer'><p>&copy; " . date('Y') . " The Wheel of Time Blog</p></footer>";
+    $page->Display();
+    exit;
+}
+
+// Only allow admins
+if (!isset($_SESSION['user_id']) || $_SESSION['username'] !== 'admin') {
+    header("Location: login.php");
+    exit;
+}
 
 $page = new Page();
+$db = new Database();
 
-$page->title = "Dashboard - The Wheel of Time Blog";
+$page->title = "Admin Dashboard - The Wheel of Time Blog";
 $page->cssScripts = "
     <link rel='stylesheet' href='../css/styles.css'>
-    <link rel='stylesheet' href='../CSS/dashboard.css'>
+    <link rel='stylesheet' href='../css/dashboard.css'>
     <script src='../js/script.js' defer></script>
-    <link rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css'>
 ";
 
-// Dynamic user name display
-$username = isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Guest';
-
-// Dynamic auth link: Login or Logout
-$authLink = isset($_SESSION['user_id'])
-    ? "<a href='logout.php'>Sign Out</a>"
-    : "<a href='login.php'>Login</a>";
-
-// Header with dynamic content
+// Header setup
+$username = htmlspecialchars($_SESSION['username']);
+$authLink = "<a href='logout.php'>Sign Out</a>";
 $page->headerContent = "
     <a href='index.php'>
         <img src='../Images/WOT_Logo.png' alt='The Wheel of Time Blog' class='logo'>
     </a>
     <div class='header-text'>
-        <h1>The Wheel of Time Blog</h1>
-        <p class='subtitle'>Explore, Discuss, and Learn</p>
+        <h1>Admin Dashboard</h1>
+        <p class='subtitle'>Manage Users, Posts, and More</p>
     </div>
     <div class='user-menu'>
         <span id='usernameDisplay'>{$username}</span>
@@ -41,58 +70,50 @@ $page->headerContent = "
     </div>
 ";
 
+// Sidebar
 $page->sidebarContent = "
     <a href='index.php' class='w3-bar-item w3-button custom-home-btn'>Home</a>
     <a href='blog.php' class='w3-bar-item w3-button'>Blog Posts</a>
     <a href='profile.php' class='w3-bar-item w3-button'>User Profiles</a>
     <a href='create_post.php' class='w3-bar-item w3-button'>Create Blog Post</a>
-    <a href='dashboard.php' class='w3-bar-item w3-button'>Dashboard</a>
+    <a href='dashboard.php' class='w3-bar-item w3-button'>Admin Dashboard</a>
 ";
 
+// Fetch data
+$totalPosts = count($db->queryArray("SELECT post_id FROM Posts"));
+$totalComments = count($db->queryArray("SELECT comment_id FROM Comments"));
+$newUsers = count($db->queryArray("SELECT user_id FROM Users WHERE created_at >= CURDATE() - INTERVAL 7 DAY"));
+
 $page->content = "
-    <main class='content dashboard-page'>
-        <h2>Dashboard</h2>
-        <div class='dashboard-widgets'>
-            <div class='widget'>
-                <h3>Total Posts</h3>
-                <p>24</p>
-            </div>
-            <div class='widget'>
-                <h3>Total Comments</h3>
-                <p>87</p>
-            </div>
-            <div class='widget'>
-                <h3>New Users</h3>
-                <p>5</p>
-            </div>
-            <div class='widget'>
-                <h3>Pending Moderation</h3>
-                <p>3</p>
-            </div>
-        </div>
+    <main class='content admin-dashboard'>
+        <h2>Admin Controls</h2>
+
+        <section>
+            <h3>Users (New This Week: {$newUsers})</h3>
+            <ul class='admin-list'>" .
+                implode('', array_map(fn($u) => "<li><a href='edit_user.php?id={$u['user_id']}'>" . htmlspecialchars($u['username']) . "</a></li>", $db->queryArray("SELECT * FROM Users"))) .
+            "</ul>
+        </section>
+
+        <section>
+            <h3>Posts (Total: {$totalPosts})</h3>
+            <ul class='admin-list'>" .
+                implode('', array_map(fn($p) => "<li><a href='post.php?id={$p['post_id']}'>" . htmlspecialchars($p['title']) . "</a></li>", $db->queryArray("SELECT * FROM Posts"))) .
+            "</ul>
+        </section>
+
+        <section>
+            <h3>Comments (Total: {$totalComments})</h3>
+            <ul class='admin-list'>" .
+                implode('', array_map(fn($c) => "<li>" . htmlspecialchars(substr($c['comment_text'], 0, 60)) . "...</li>", $db->queryArray("SELECT * FROM Comments"))) .
+            "</ul>
+        </section>
     </main>
 ";
 
 $page->footerContent = "
     <footer class='footer'>
-        <div class='footer-about'>
-            <h3>About This Blog</h3>
-            <p>The Wheel of Time Blog is a space for fans to explore, discuss, and share insights about the beloved series. Whether you're analyzing deep lore, debating theories, or reviewing episodes and books, this is your home for all things Wheel of Time.</p>
-        </div>
-        <div class='footer-links'>
-            <h3>Quick Links</h3>
-            <ul>
-                <li><a href='index.php'>Home</a></li>
-                <li><a href='blog.php'>Blog Posts</a></li>
-                <li><a href='profile.php'>Profile</a></li>
-                <li><a href='contact.php'>Contact</a></li>
-            </ul>
-        </div>
-        <div class='footer-contact'>
-            <h3>Contact Us</h3>
-            <p>Email: support@wheeloftimeblog.com</p>
-            <p>Follow us on <a href='#'>Twitter</a> | <a href='#'>Facebook</a> | <a href='#'>Instagram</a></p>
-        </div>
+        <p>© " . date("Y") . " The Wheel of Time Blog | Admin Panel</p>
     </footer>
 ";
 
