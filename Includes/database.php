@@ -40,10 +40,6 @@ class Database {
         return $this->connection->query($sql);
     }
 
-    public function queryAll($sql) {
-        return $this->connection->query($sql);
-    }
-
     public function queryArray($sql) {
         $result = $this->connection->query($sql);
         $rows = [];
@@ -133,13 +129,13 @@ class Database {
         return $this->queryArray("SELECT * FROM Posts WHERE $col = '$val'");
     }
 
-    public function addPost($user_id, $title, $topics, $content, $media_path = null) {
+    public function addPost($user_id, $topic_id, $title, $content, $media_path = null) {
         $title = $this->connection->real_escape_string($title);
-        $topics = $this->connection->real_escape_string($topics);
+        $topic_id = intval($topic_id);
         $content = $this->connection->real_escape_string($content);
         $media = $media_path ? "'" . $this->connection->real_escape_string($media_path) . "'" : "NULL";
-        return $this->query("INSERT INTO Posts (user_id, title, topics, content, media_path) 
-                             VALUES ($user_id, '$title', '$topics', '$content', $media)");
+        return $this->query("INSERT INTO Posts (user_id, topic_id, title, content, media_path) 
+                             VALUES ($user_id, $topic_id, '$title', '$content', $media)");
     }
 
     public function updatePost($id, $updates) {
@@ -223,8 +219,12 @@ class Database {
         $set = [];
         foreach ($updates as $col => $val) {
             $col = $this->connection->real_escape_string($col);
-            $val = $this->connection->real_escape_string($val);
-            $set[] = "$col = '$val'";
+            if ($val === null) {
+                $set[] = "$col = NULL";
+            } else {
+                $val = $this->connection->real_escape_string($val);
+                $set[] = "$col = '$val'";
+            }
         }
         $setString = implode(', ', $set);
         $sql = "UPDATE $table SET $setString WHERE $keyColumn = " . intval($id);
@@ -247,10 +247,14 @@ class Database {
     public function getUserVote($userId, $postId) {
         $query = "SELECT vote_type FROM Rankings WHERE user_id = ? AND post_id = ?";
         $stmt = $this->connection->prepare($query);
+        if (!$stmt) {
+            die("Prepare failed: " . $this->connection->error);
+        }
         $stmt->bind_param("ii", $userId, $postId);
         $stmt->execute();
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
+        $stmt->close();
         return $row['vote_type'] ?? null;
     }
 
