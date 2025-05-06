@@ -30,30 +30,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['topics'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title   = trim($_POST['post-title'] ?? '');
-    $selectedTopics = $_POST['topics'] ?? [];
+    $selectedTopic = intval($_POST['topics'] ?? 0); // Ensure topic_id is an integer
     $content = trim($_POST['post-content'] ?? '');
 
-    $mediaPath = null;
-    if (!empty($_FILES['post-media']['name'])) {
-        $uploadDir = '../uploads/';
-        if (!is_dir($uploadDir) || !is_writable($uploadDir)) {
-            die('Upload directory does not exist or is not writable.');
-        }
-
-        $fileName = basename($_FILES['post-media']['name']);
-        $targetPath = $uploadDir . $fileName;
-
-        if (move_uploaded_file($_FILES['post-media']['tmp_name'], $targetPath)) {
-            $mediaPath = '/uploads/' . $fileName;
+    // Validate topic_id
+    $validTopic = false;
+    foreach ($topics as $topic) {
+        if ($topic['topic_id'] == $selectedTopic) {
+            $validTopic = true;
+            break;
         }
     }
 
-    if ($title && $selectedTopics && $content) {
-        $db->addPost($_SESSION['user_id'], $title, $selectedTopics, $content, $mediaPath);
-        header('Location: blog.php');
-        exit;
+    if (!$validTopic) {
+        $error = "Invalid topic selected.";
     } else {
-        $error = "All fields except media are required.";
+        $mediaPath = null;
+        if (!empty($_FILES['post-media']['name'])) {
+            $uploadDir = '../uploads/';
+            if (!is_dir($uploadDir) || !is_writable($uploadDir)) {
+                die('Upload directory does not exist or is not writable.');
+            }
+
+            $fileName = basename($_FILES['post-media']['name']);
+            $targetPath = $uploadDir . $fileName;
+
+            if (move_uploaded_file($_FILES['post-media']['tmp_name'], $targetPath)) {
+                $mediaPath = '/uploads/' . $fileName;
+            }
+        }
+
+        if ($title && $selectedTopic && $content) {
+            $db->addPost($_SESSION['user_id'], $selectedTopic, $title, $content, $mediaPath);
+            header('Location: blog.php');
+            exit;
+        } else {
+            $error = "All fields except media are required.";
+        }
     }
 }
 
@@ -111,8 +124,8 @@ $page->content = "
                 <select name='topics' required>
                     <option value='' disabled selected>Select a topic</option>
                     " . implode("", array_map(function($topic) use ($selectedTopics) {
-                        return "<option value='" . htmlspecialchars($topic) . "' " . (in_array($topic, $selectedTopics) ? "selected" : "") . ">" . htmlspecialchars($topic) . "</option>";
-                    }, $topicOptions)) . "
+                        return "<option value='" . htmlspecialchars($topic['topic_id']) . "' " . (in_array($topic['topic_id'], $selectedTopics) ? "selected" : "") . ">" . htmlspecialchars($topic['name']) . "</option>";
+                    }, $topics)) . "
                 </select>
 
                 <label for='post-media'><b>Media (Image, Video, Audio)</b></label>
