@@ -57,22 +57,24 @@ A responsive blogging platform inspired by *The Wheel of Time* universe. Built w
 
 ## Project Structure
 
+```
 The-Wheel-of-Time-Blog/
-├─ CSS/ # Stylesheets
-├─ Database/ # Database seed (mali.sql)
-├─ Images/ # Logos, avatars, uploaded images
-├─ Includes/ # Config and database connection files
-├─ JS/ # Client-side scripts
-├─ Pages/ # All app pages (blog, post, login, dashboard, etc.)
-├─ index.php # Entry point
+├─ CSS/           # Stylesheets
+├─ Database/      # Database seed (mali.sql)
+├─ Images/        # Logos, avatars, uploaded images
+├─ Includes/      # Config and database connection files
+├─ JS/            # Client-side scripts
+├─ Pages/         # All app pages (blog, post, login, dashboard, etc.)
+├─ index.php      # Entry point
 └─ install-web.sh # Optional shell installer
-
+```
 
 ---
 
 ## Getting Started
 
 ### Prerequisites
+
 - PHP 7.4+  
 - MySQL 5.7+  
 - XAMPP (or similar local dev environment)  
@@ -82,66 +84,51 @@ The-Wheel-of-Time-Blog/
 1. **Clone the repository**
    ```bash
    git clone https://github.com/mafromla/The-Wheel-of-Time-Blog.git
-
-2. **Move to your web root
-
-C:\xampp\htdocs\The-Wheel-of-Time-Blog\
-
-3. ** Configure database connection
-Edit Includes/config.php:
-
-define('DB_HOST','127.0.0.1');
-define('DB_USER','root');
-define('DB_PASS','');
-define('DB_NAME','mali');
-$root = '/The-Wheel-of-Time-Blog/';
-
-4. Import the database
-
-Go to http://localhost/phpmyadmin
-
-Create a database named mali
-
-Import Database/mali.sql
-
-5. Run the application
-Navigate to:
-http://localhost/The-Wheel-of-Time-Blog/Pages/index.php
-
-Suggested Demo Flow (For Recruiters)
-Home Page: Show slideshow and topic cards
-
-Topic Filtering: Click a topic card to view related posts
-
-Single Post View: Show voting and commenting in action
-
-Login / Register: Demonstrate user signup and login flow
-
-Create Post: Show how Posters/Admins can add content
-
-Admin Dashboard: Manage users, assign roles, edit content
-
-Known Paths
-Default logo: /Images/WOT_Logo.png
-
-Default avatar: /Images/images.3.webp
-
-User uploads: /Images/ and /uploads/
-
-License
-This project is for demonstration and portfolio purposes.
+   ```
+2. **Move to your web root**
+   ```
+   C:\xampp\htdocs\The-Wheel-of-Time-Blog\
+   ```
+3. **Configure database connection**  
+   Edit `Includes/config.php`:
+   ```php
+   define('DB_HOST','127.0.0.1');
+   define('DB_USER','root');
+   define('DB_PASS','');
+   define('DB_NAME','mali');
+   $root = '/The-Wheel-of-Time-Blog/';
+   ```
+4. **Import the database**
+   - Go to [phpMyAdmin](http://localhost/phpmyadmin)
+   - Create a database named `mali`
+   - Import `Database/mali.sql`
+5. **Run the application**
+   - Navigate to:  
+     [http://localhost/The-Wheel-of-Time-Blog/Pages/index.php](http://localhost/The-Wheel-of-Time-Blog/Pages/index.php)
 
 ---
 
-### How to Add It to Your Repo
-1. Open your repo folder in VS Code.
-2. Create a new file named **README.md** at the root of the repo.
-3. Paste the text above.
-4. Save and commit:
-   ```bash
-   git add README.md
-   git commit -m "Add portfolio-style README"
-   git push origin main
+## Suggested Demo Flow (For Recruiters)
 
+- **Home Page:** Show slideshow and topic cards
+- **Topic Filtering:** Click a topic card to view related posts
+- **Single Post View:** Show voting and commenting in action
+- **Login / Register:** Demonstrate user signup and login flow
+- **Create Post:** Show how Posters/Admins can add content
+- **Admin Dashboard:** Manage users, assign roles, edit content
 
+---
 
+## Known Paths
+
+- Default logo: `/Images/WOT_Logo.png`
+- Default avatar: `/Images/images.3.webp`
+- User uploads: `/Images/` and `/uploads/`
+
+---
+
+## License
+
+This project is for demonstration and portfolio purposes.
+
+---
